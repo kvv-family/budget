@@ -1,15 +1,21 @@
+from enum import Enum
+
 from pony.orm import Optional, PrimaryKey, Required, Set
 
 from .base import database
 
 
+class PROVIDERS(Enum):
+    LOCAL = "local"
+    GOOGLE = "google"
+    ICLOUD = "icloud"
+
+
 class User(database.Entity):
-    """Пользователи
-    """    
+    """Пользователи"""
+
     id = PrimaryKey(int, auto=True)
-    provider = Required(
-        str
-    )  # Название провайдера OAuth2 (например, "google", "github")
+    provider = Required(str, default=PROVIDERS.LOCAL.value)
     provider_id = Required(str)  # Уникальный идентификатор пользователя от провайдера
     email = Required(str, unique=True)  # Email пользователя (уникальный)
     first_name = Required(str)
@@ -27,12 +33,15 @@ class User(database.Entity):
     notifications = Set("Notification")  # Связь с уведомлениями
     tokens = Set("OAuthToken")  # Связь с токенами OAuth2
 
-    def get_full_name(self) -> str: ...
+    def get_full_name(self) -> str:
+        if self.middle_name:
+            return f"{self.last_name} {self.first_name} {self.middle_name}"
+        return f"{self.last_name} {self.first_name}"
 
 
 class OAuthToken(database.Entity):
-    """OAuthToken
-    """    
+    """OAuthToken"""
+
     id = PrimaryKey(int, auto=True)
     user = Required(User)  # Связь с пользователем
     access_token = Required(str)  # Токен доступа
@@ -41,13 +50,13 @@ class OAuthToken(database.Entity):
     expires_at = Optional(int)  # Время истечения токена (timestamp)
     scope = Optional(str)  # Области доступа (scope), предоставленные провайдером
     provider = Required(
-        str
+        str, default=PROVIDERS.LOCAL.value
     )  # Название провайдера OAuth2 (например, "google", "github")
 
 
 class Notification(database.Entity):
-    """Модель для хранения уведомлений пользователя
-    """    
+    """Модель для хранения уведомлений пользователя"""
+
     id = PrimaryKey(int, auto=True)
     message = Required(str)  # Текст уведомления
     is_read = Required(bool, default=False)  # Прочитано ли уведомление

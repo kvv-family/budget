@@ -1,0 +1,24 @@
+@import "primeicons/primeicons.css";
+
+.guard-layout {
+    width: 100vw;
+
+    .guard-card {
+        margin: 0 auto;
+        max-width: 400px;
+
+        .p-card-title {
+            text-align: center;
+        }
+
+        .p-card-content {
+            row-gap: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        button {
+            width: 100%;
+        }
+    }
+}

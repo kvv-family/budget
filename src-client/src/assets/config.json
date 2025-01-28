@@ -1,0 +1,10 @@
+{
+    "providers": {
+        "locale": {
+            "configurationUrl": "http://localhost:8000/.well-known/openid-configuration",
+            "client_id": "budget",
+            "scope": "profile email",
+            "redirect_url": "/callback?token="
+        }
+    }
+}

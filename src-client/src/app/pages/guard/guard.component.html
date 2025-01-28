@@ -1,0 +1,10 @@
+
+<div class="guard-layout">
+    <div class="guard-card">
+        <p-card header="Выберите сервис авторизации">
+            <p-button icon="pi pi-user" label="Локальный сервис" size="large" (onClick)="localeClick()" />
+            <p-button icon="pi pi-google" label="Google" size="large" />
+            <p-button icon="pi pi-apple" label="Apple" size="large" [disabled]="true" />
+        </p-card>
+    </div>
+</div>
