@@ -1,0 +1,53 @@
+<p-card header="Транзакции">
+    <div>
+        <form class="flex flex-col gap-4">
+            <p-selectbutton [options]="typeTransaction" optionLabel="label" optionValue="value" aria-labelledby="basic" />
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <p-floatLabel variant="on">
+                    <p-inputnumber id="amount" class="w-full" />
+                    <label for="amount">Сумма</label>
+                </p-floatLabel>
+                <p-floatLabel variant="on">
+                    <p-inputnumber id="amount" class="w-full" />
+                    <label for="amount">Категория</label>
+                </p-floatLabel>
+                <p-floatLabel variant="on">
+                    <p-datepicker class="w-full" styleClass="w-full" dateFormat="dd.mm.yy" />
+                    <label for="amount">Дата</label>
+                </p-floatLabel>
+                <p-floatLabel variant="on">
+                    <p-inputnumber id="amount" class="w-full" />
+                    <label for="amount">Счёт</label>
+                </p-floatLabel>
+            </div>
+            <p-floatLabel variant="on">
+                <textarea rows="3" cols="30" pTextarea class="w-full"></textarea>
+                <label for="amount">Комментарий</label>
+            </p-floatLabel>
+            <p-button styleClass="w-full" class="w-full" label="Добавить" icon="pi pi-plus" severity="success"></p-button>
+        </form>
+        <p-table stripedRows [value]="transactions" size="small">
+            <ng-template #header>
+                <tr>
+                    <th>Дата</th>
+                    <th>Категория</th>
+                    <th>Сумма</th>
+                    <th>Счёт</th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template #body let-transaction>
+                <tr>
+                    <td>{{transaction.date | date}}</td>
+                    <td>{{transaction.category.name}}</td>
+                    <td>{{transaction.amount}}</td>
+                    <td>{{transaction.account}}</td>
+                    <td class="flex justify-end">
+                        <p-button variant="text" icon="pi pi-ellipsis-v" severity="secondary"></p-button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</p-card>

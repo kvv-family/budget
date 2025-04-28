@@ -1,0 +1,19 @@
+<p-card header="Обзор финансов">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <app-analys-item
+      type="balance"
+      [balance]="10000"
+      [diff]="1000"
+    ></app-analys-item>
+    <app-analys-item
+      type="income"
+      [balance]="10000"
+      [diff]="5"
+    ></app-analys-item>
+    <app-analys-item
+      type="expense"
+      [balance]="10000"
+      [diff]="-8"
+    ></app-analys-item>
+  </div>
+</p-card>

@@ -1,0 +1,23 @@
+<div
+  class="rounded-xl p-6 flex flex-col gap-2 justify-center items-center"
+  [class.bg-blue-50]="type === 'balance'"
+  [class.bg-green-50]="type === 'income'"
+  [class.bg-red-50]="type === 'expense'"
+>
+  <div class="text-blue-500 mb-2">
+    @if (type === 'balance') {
+    <i class="text-3xl! pi pi-wallet"></i>
+    } @else if (type === 'income') {
+    <i class="text-3xl! pi pi-arrow-up"></i>
+    } @else if (type === 'expense') {
+    <i class="text-3xl! pi pi-arrow-down"></i>
+    }
+  </div>
+  <h3 class="text-lg font-medium text-gray-700 mb-1">Текущий баланс</h3>
+  <span class="text-2xl font-bold text-gray-900"> {{ balance }} ₽</span>
+  @if (type === 'balance') {
+  <span class="text-sm text-gray-500 mt-2"> {{ diff }} ₽ за месяц</span>
+  } @else {
+  <span class="text-sm text-gray-500 mt-2"> {{diff > 0 ? '+' : ''}}{{ diff }}% к прошлому месяцу</span>
+  }
+</div>
